@@ -16,10 +16,15 @@ describe GildedRose do
       GildedRose.new(item).adjust_quality(item, -1)
       expect(item.quality).to eq(0)
     end
-    it "will adjust quality from positive to zero" do
+    it "will floor quality to zero" do
       item = Item.new("foo", 10, 10)
       GildedRose.new(item).adjust_quality(item, -20)
       expect(item.quality).to eq(0)
+    end
+    it "will ceiling quality to 50" do
+      item = Item.new("foo", 10, 10)
+      GildedRose.new(item).adjust_quality(item, 50)
+      expect(item.quality).to eq(50)
     end
   end
 
