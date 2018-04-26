@@ -1,6 +1,6 @@
 class ItemAdjustmentHandler
 
-  def get_adjustments(item)
+  def get_adj(item)
     method_router(item)
   end
 
@@ -25,7 +25,7 @@ class ItemAdjustmentHandler
   end
 
   def maturing_item(item)
-    qualAdj = past_date?(item) ? -2 : 1
+    qualAdj = past_date?(item) ? 2 : 1
     {sellInAdj:-1, qualAdj: qualAdj}
   end
 
@@ -49,7 +49,7 @@ class ItemAdjustmentHandler
   end
 
   def past_date?(item)
-    item.sell_in < 0
+    item.sell_in <= 0
   end
 
 end
