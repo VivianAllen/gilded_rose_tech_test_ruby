@@ -2,12 +2,28 @@ require File.join(File.dirname(__FILE__), '../gilded_rose')
 
 describe GildedRose do
 
+  let(:mock_handler_class) {
+    double :mock_item_adjustment_handler_class,
+    new: mock_handler
+  }
+  let(:mock_handler) {
+    double :mock_item_adjustment_handler,
+    get_adjustments: {sellInAdj:-1, qualAdj: -1}
+  }
+
   describe "#update_quality" do
     it "does not change the name" do
       items = [Item.new("foo", 0, 0)]
-      GildedRose.new(items).update_quality()
+      GildedRose.new(items, mock_handler_class).update_quality()
       expect(items[0].name).to eq "foo"
     end
+    it "applies adjustments" do
+      items = [Item.new("foo", 1, 1)]
+      GildedRose.new(items, mock_handler_class).update_quality()
+      expect(items[0].sell_in).to eq 0
+      expect(items[0].quality).to eq 0
+    end
+
   end
 
   describe "#adjust_quality" do
