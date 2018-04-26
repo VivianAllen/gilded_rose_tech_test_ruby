@@ -26,6 +26,11 @@ describe GildedRose do
       GildedRose.new(item).adjust_quality(item, 50)
       expect(item.quality).to eq(50)
     end
+    it "can handle above-envelope high-quality static-quality items" do
+      item = Item.new("foo", 10, 80)
+      GildedRose.new(item).adjust_quality(item, 0)
+      expect(item.quality).to eq(80)
+    end
   end
 
 end

@@ -9,11 +9,11 @@ class ItemHandler
   def method_router(item)
     name = item.name.downcase
     if name.include?("aged brie")
-      aged_item(item)
+      maturing_item(item)
     elsif name.include?("sulfuras")
-      legendary_item(item)
+      static_item(item)
     elsif name.include?("backstage passes")
-      backstage_pass(item)
+      time_critical_item(item)
     else
       regular_item(item)
     end
@@ -24,20 +24,20 @@ class ItemHandler
     {sellInAdj:-1, qualAdj: qualAdj}
   end
 
-  def aged_item(item)
+  def maturing_item(item)
     qualAdj = past_date?(item) ? -2 : 1
     {sellInAdj:-1, qualAdj: qualAdj}
   end
 
-  def legendary_item(item)
+  def static_item(item)
     {sellInAdj: 0, qualAdj: 0}
   end
 
-  def backstage_pass(item)
-    {sellInAdj: -1, qualAdj: get_pass_adj(item)}
+  def time_critical_item(item)
+    {sellInAdj: -1, qualAdj: get_time_crit_adj(item)}
   end
 
-  def get_pass_adj(item)
+  def get_time_crit_adj(item)
     date = item.sell_in
     if date > 10
       return 1
