@@ -70,7 +70,7 @@ class GildedRose
   end
 
   def adj_too_high?(item, adj)
-    item.quality + adj >= MAX_QUALITY
+    item.quality + adj >= MAX_QUALITY && item.quality <= MAX_QUALITY
   end
 
   def adj_too_low?(item, adj)
