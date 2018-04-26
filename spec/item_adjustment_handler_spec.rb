@@ -61,7 +61,12 @@ describe ItemAdjustmentHandler do
     context "conjured items" do
       it 'returns {sellInAdj: -1, qualAdj: -2} for a conjured item' do
         item = Item.new("Conjured whatever", 10, 10)
-        expected_hsh = {sellInAdj: -1, qualAdj: 3}
+        expected_hsh = {sellInAdj: -1, qualAdj: -2}
+        expect(handler.get_adj(item)).to eq(expected_hsh)
+      end
+      it 'returns {sellInAdj: -1, qualAdj: -4} for a conjured item past date' do
+        item = Item.new("Conjured whatever", 0, 10)
+        expected_hsh = {sellInAdj: -1, qualAdj: -4}
         expect(handler.get_adj(item)).to eq(expected_hsh)
       end
     end

@@ -14,6 +14,8 @@ class ItemAdjustmentHandler
       static_item(item)
     elsif name.include?("backstage passes")
       time_critical_item(item)
+    elsif name.include?("conjured")
+      conjured_item(item)
     else
       regular_item(item)
     end
@@ -35,6 +37,11 @@ class ItemAdjustmentHandler
 
   def time_critical_item(item)
     {sellInAdj: -1, qualAdj: get_time_crit_adj(item)}
+  end
+
+  def conjured_item(item)
+    qualAdj = past_date?(item) ? -4 : -2
+    {sellInAdj:-1, qualAdj: qualAdj}
   end
 
   def get_time_crit_adj(item)
