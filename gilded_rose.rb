@@ -51,10 +51,15 @@ class GildedRose
   end
 
   def adjust_quality(item, adjustment)
-    item.quality += adjustment if legal_adjustment?(item, adjustment)
+    item.quality += legalize(item, adjustment)
   end
 
   private
+
+  def legalize(item, adjustment)
+    return adjustment if legal_adjustment?(item, adjustment)
+    return item.quality*-1 if item.quality + adjustment <= 0
+  end
 
   def legal_adjustment?(item, adjustment)
     item.quality + adjustment >= 0 && item.quality + adjustment <= 50
