@@ -34,13 +34,19 @@ class ItemHandler
   end
 
   def backstage_pass(item)
-    {sellInAdj: -1, qualAdj: 1}
+    {sellInAdj: -1, qualAdj: get_pass_adj(item)}
   end
 
-  # def get_backstage_pass_quality_adj(item)
-  #   case item.sell_in
-  #   when >10
-  # end
+  def get_pass_adj(item)
+    date = item.sell_in
+    if date > 10
+      return 1
+    elsif date > 5
+      return 2
+    else
+      return 3
+    end
+  end
 
   def past_date?(item)
     item.sell_in < 0
