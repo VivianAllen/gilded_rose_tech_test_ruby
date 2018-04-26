@@ -11,7 +11,12 @@ class ItemHandler
   end
 
   def regular_item(item)
-    {sellInAdj:-1, qualAdj: -1}
+    qualAdj = past_date?(item) ? -2 : -1
+    {sellInAdj:-1, qualAdj: qualAdj}
+  end
+
+  def past_date?(item)
+    item.sell_in < 0
   end
 
 end
