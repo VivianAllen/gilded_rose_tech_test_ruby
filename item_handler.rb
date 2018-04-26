@@ -7,9 +7,10 @@ class ItemHandler
   private
 
   def method_router(item)
-    case item.name
-    when "Aged Brie"
-      aged_brie(item)
+    if item.name == "Aged Brie"
+      aged_item(item)
+    elsif item.name.include?("Sulfuras")
+      legendary_item(item)
     else
       regular_item(item)
     end
@@ -20,9 +21,13 @@ class ItemHandler
     {sellInAdj:-1, qualAdj: qualAdj}
   end
 
-  def aged_brie(item)
+  def aged_item(item)
     qualAdj = past_date?(item) ? -2 : 1
     {sellInAdj:-1, qualAdj: qualAdj}
+  end
+
+  def legendary_item(item)
+    {sellInAdj: 0, qualAdj: 0}
   end
 
   def past_date?(item)
