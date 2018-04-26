@@ -7,11 +7,21 @@ class ItemHandler
   private
 
   def method_router(item)
-    regular_item(item)
+    case item.name
+    when "Aged Brie"
+      aged_brie(item)
+    else
+      regular_item(item)
+    end
   end
 
   def regular_item(item)
     qualAdj = past_date?(item) ? -2 : -1
+    {sellInAdj:-1, qualAdj: qualAdj}
+  end
+
+  def aged_brie(item)
+    qualAdj = past_date?(item) ? -2 : 1
     {sellInAdj:-1, qualAdj: qualAdj}
   end
 
