@@ -19,6 +19,19 @@ describe ItemHandler do
         expect(handler.get_adjustments(item)).to eq(expected_hsh)
       end
     end
+
+    context "aged brie" do
+      it '# returns {sellInAdj: -1, qualAdj: 1} for Aged Brie in sell-by date' do
+        item = Item.new("Aged Brie", 10, 10)
+        expected_hsh = {sellInAdj:-1, qualAdj: 1}
+        expect(handler.get_adjustments(item)).to eq(expected_hsh)
+      end
+      it '# returns {sellInAdj: -1, qualAdj: -2} for Aged Brie past sell-by date' do
+        item = Item.new("Aged Brie", -1, 10)
+        expected_hsh = {sellInAdj:-1, qualAdj: -2}
+        expect(handler.get_adjustments(item)).to eq(expected_hsh)
+      end
+    end
   end
 
 end
