@@ -1,5 +1,8 @@
 class GildedRose
 
+  MIN_QUALITY = 0
+  MAX_QUALITY = 50
+
   def initialize(items)
     @items = items
   end
@@ -50,19 +53,28 @@ class GildedRose
     end
   end
 
-  def adjust_quality(item, adjustment)
-    item.quality += legalize(item, adjustment)
+  def adjust_quality(item, adj)
+    item.quality += legalize_adj(item, adj)
   end
 
   private
 
-  def legalize(item, adjustment)
-    return adjustment if legal_adjustment?(item, adjustment)
-    return item.quality*-1 if item.quality + adjustment <= 0
+  def legalize_adj(item, adj)
+    return adj if legal_adj?(item, adj)
+    return item.quality*-1 if adj_too_low?(item, adj)
+    return MAX_QUALITY - item.quality if adj_too_high?(item, adj)
   end
 
-  def legal_adjustment?(item, adjustment)
-    item.quality + adjustment >= 0 && item.quality + adjustment <= 50
+  def legal_adj?(item, adj)
+    !adj_too_high?(item, adj) && !adj_too_low?(item, adj)
+  end
+
+  def adj_too_high?(item, adj)
+    item.quality + adj >= MAX_QUALITY
+  end
+
+  def adj_too_low?(item, adj)
+    item.quality + adj <= MIN_QUALITY
   end
 end
 
