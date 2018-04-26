@@ -47,6 +47,11 @@ describe ItemHandler do
         expected_hsh = {sellInAdj: -1, qualAdj: 1}
         expect(handler.get_adjustments(item)).to eq(expected_hsh)
       end
+      it '# returns {sellInAdj: -1, qualAdj: 2} for a backstage with less than 10 days to go' do
+        item = Item.new("Backstage passes", 9, 10)
+        expected_hsh = {sellInAdj: -1, qualAdj: 2}
+        expect(handler.get_adjustments(item)).to eq(expected_hsh)
+      end
     end
   end
 
