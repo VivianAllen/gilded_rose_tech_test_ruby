@@ -32,6 +32,14 @@ describe ItemHandler do
         expect(handler.get_adjustments(item)).to eq(expected_hsh)
       end
     end
+
+    context "legendary hand of Sulfuras or whatever, nerds" do
+      it '# returns {sellInAdj: 0, qualAdj: 0} for Sulfuras' do
+        item = Item.new("Sulfuras, Hand of Ragnaros", 0, 80)
+        expected_hsh = {sellInAdj:0, qualAdj: 0}
+        expect(handler.get_adjustments(item)).to eq(expected_hsh)
+      end
+    end
   end
 
 end
