@@ -1,9 +1,9 @@
-require File.join(File.dirname(__FILE__), '../item_handler')
+require File.join(File.dirname(__FILE__), '../item_adjustment_handler')
 require File.join(File.dirname(__FILE__), '../gilded_rose')
 
-describe ItemHandler do
+describe ItemAdjustmentHandler do
 
-  let(:handler) { ItemHandler.new() }
+  let(:handler) { ItemAdjustmentHandler.new() }
 
   describe "#get_adjustments" do
 

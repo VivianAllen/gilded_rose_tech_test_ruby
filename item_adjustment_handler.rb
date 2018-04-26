@@ -1,4 +1,4 @@
-class ItemHandler
+class ItemAdjustmentHandler
 
   def get_adjustments(item)
     method_router(item)

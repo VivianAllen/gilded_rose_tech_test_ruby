@@ -1,11 +1,14 @@
+require_relative 'item_adjustment_handler'
+
 class GildedRose
 
   MIN_QUALITY = 0
   MAX_QUALITY = 50
 
-  def initialize(items)
+  def initialize(items, handler_class=ItemAdjustmentHandler)
     @items = items
-  end
+    @handler = handler_class.new  end
+
 
   def update_quality()
     @items.each do |item|
